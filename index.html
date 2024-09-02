@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firma und Produkt Eingabe</title>
+    <!-- Bootstrap CSS einbinden -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h4>Firma und Produkt Eingabe</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="inputForm">
+                            <div class="form-group">
+                                <label for="firma">Firma:</label>
+                                <input type="text" class="form-control" id="firma" name="firma" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="produkt">Produkt:</label>
+                                <input type="text" class="form-control" id="produkt" name="produkt" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Absenden</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS und Abhängigkeiten -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById('inputForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Verhindert das Standardformular-Verhalten
+            
+            // Die Firma und das Produkt aus den Input-Feldern abrufen
+            const firma = document.getElementById('firma').value;
+            const produkt = document.getElementById('produkt').value;
+            
+            // Das JSON-Objekt zusammenstellen
+            const payload = {
+                "customer": {
+                    "number": "+4915208865091"
+                },
+                "assistantId": "737a67b2-7832-4b44-8117-47bd5d7d0417",
+                "assistantOverrides": {
+                    "variableValues": {
+                        "firma": firma,
+                        "produkt": produkt
+                    },
+                    "language": "de"
+                },
+                "phoneNumberId": "9241a554-2e84-4f0f-92ab-e9feb451d21b"
+            };
+            
+            // JSON-Payload in der Konsole anzeigen (zum Testen)
+            console.log(JSON.stringify(payload));
+
+            // Beispiel für das Senden der Daten an einen Server (Endpoint)
+            fetch('https://example.com/api/endpoint', { // Ersetzen Sie die URL durch den tatsächlichen Endpunkt
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => console.log('Erfolg:', data))
+            .catch((error) => console.error('Fehler:', error));
+        });
+    </script>
+</body>
+</html>
