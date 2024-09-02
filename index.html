@@ -25,6 +25,10 @@
                                 <label for="produkt">Produkt:</label>
                                 <input type="text" class="form-control" id="produkt" name="produkt" required>
                             </div>
+                            <div class="form-group">
+                                <label for="customerNumber">Kundennummer (Telefonnummer):</label>
+                                <input type="tel" class="form-control" id="customerNumber" name="customerNumber" required>
+                            </div>
                             <button type="submit" class="btn btn-primary btn-block">Absenden</button>
                         </form>
                     </div>
@@ -42,14 +46,15 @@
         document.getElementById('inputForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Verhindert das Standardformular-Verhalten
             
-            // Die Firma und das Produkt aus den Input-Feldern abrufen
+            // Die Werte aus den Input-Feldern abrufen
             const firma = document.getElementById('firma').value;
             const produkt = document.getElementById('produkt').value;
+            const customerNumber = document.getElementById('customerNumber').value;
             
             // Das JSON-Objekt zusammenstellen
             const payload = {
                 "customer": {
-                    "number": "+4915208865091"
+                    "number": customerNumber
                 },
                 "assistantId": "737a67b2-7832-4b44-8117-47bd5d7d0417",
                 "assistantOverrides": {
@@ -65,8 +70,8 @@
             // JSON-Payload in der Konsole anzeigen (zum Testen)
             console.log(JSON.stringify(payload));
 
-            // Beispiel für das Senden der Daten an einen Server (Endpoint)
-            fetch('https://example.com/api/endpoint', { // Ersetzen Sie die URL durch den tatsächlichen Endpunkt
+            // Senden der Daten an den tatsächlichen Server-Endpoint
+            fetch('https://api.vapi.ai/call/phone', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
