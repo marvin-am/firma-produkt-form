@@ -13,7 +13,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header text-center">
-                        <h4>Firma und Produkt Eingabe</h4>
+                        <h4>A&M Call AI</h4>
                     </div>
                     <div class="card-body">
                         <form id="inputForm">
@@ -74,7 +74,8 @@
             fetch('https://api.vapi.ai/call/phone', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer 4b6c6c40-fa9f-42e6-a9e6-da60249edeab'
                 },
                 body: JSON.stringify(payload)
             })
